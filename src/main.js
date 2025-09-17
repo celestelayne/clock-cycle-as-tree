@@ -1,5 +1,18 @@
 import * as THREE from 'three';
 
+// CLOCK CYCLE PROOF OF CONCEPT
+let pulseHz = 1.6;     // pulses per second (visible “clock”)
+let base = 1.0;        // baseline scale
+let amp  = 0.18;       // how much it grows/shrinks around baseline
+let t0 = performance.now();
+
+function setPulseHz(hz) {
+  pulseHz = hz;
+  console.log(`pulseHz set to ${hz}`);
+}
+
+window.setPulseHz = setPulseHz;
+
 /*
   ===== UTILITY HELPERS
 */
@@ -138,6 +151,10 @@ loadTexture('./assets/cgaxis_raw_cracked_white_concrete_46_42_4K/raw_cracked_whi
   scene.add(floor);
 });
 
+
+/*
+  ===== RENDER LOOP
+*/
 function animate() {
     // call the animate() function every frame - creates a loop
     requestAnimationFrame(animate);
@@ -146,10 +163,14 @@ function animate() {
     controls.update();
 
     // increase the cube's rotation each frame
-    cube.rotation.x += 0.01
-    cube.rotation.y += 0.01
-    cube.rotation.z += 0
-  
+    // cube.rotation.x += 0.01
+    // cube.rotation.y += 0.01
+    // cube.rotation.z += 0
+
+    const t = (performance.now() - t0) / 1000;
+    const s = base + amp * Math.sin(2 * Math.PI * pulseHz * t);
+    // cube.scale.set(s, s, s); 
+
     // render the updated scene and camera
     renderer.render(scene, camera)
 }

@@ -1,8 +1,8 @@
 {
-  "name": "immersive-starter-threejs",
+  "name": "clock-cycle-as-tree",
   "private": true,
   "version": "1.0.0",
-  "description": "Starter kit for WebXR scenes with Three.js",
+  "description": "Clock Cycle Prototype",
   "type": "module",
   "scripts": {
     "dev": "vite",
